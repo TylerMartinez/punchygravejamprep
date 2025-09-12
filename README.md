@@ -31,7 +31,7 @@ Controls:
 <br>
 <br>
 <p>
-  Ok so there is this thing in the script for the 3d player controls where if you set the player3d collision layer to "1" and mask to "1" the block physics decide they enjoy working and you can toss those suckers.
+  Ok so there is this thing in the script for the 3d player controls where if you set the player3d collision layer to "1" and mask to "1" the block physics decide they enjoy working and you can toss those suckers. The reason theyre currently off is because theyre not really ideal for a puzzle too uncontrollable.
 </p>
 
 <h3>
