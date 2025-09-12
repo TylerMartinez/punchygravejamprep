@@ -1,0 +1,203 @@
+[gd_scene load_steps=22 format=4 uid="uid://1iuc7we0mvfy"]
+
+[ext_resource type="TileSet" uid="uid://dws2xxtnabs8c" path="res://node_2d.tres" id="1_hlidw"]
+[ext_resource type="Texture2D" uid="uid://bqw3qplodehu5" path="res://2D Scene/Object Sprites/Bread.png" id="2_w0t24"]
+[ext_resource type="Script" uid="uid://542rtk1ae3xw" path="res://character_body_2d.gd" id="3_7arjl"]
+[ext_resource type="Texture2D" uid="uid://bkiwqgspso5ce" path="res://2D Scene/Player Sprites/CharLU.png" id="4_ahvsh"]
+[ext_resource type="Texture2D" uid="uid://3spami3k42hi" path="res://2D Scene/Player Sprites/CharRU.png" id="5_8c7tm"]
+[ext_resource type="Texture2D" uid="uid://japycnh3o81n" path="res://2D Scene/Player Sprites/CharU.png" id="6_gedy8"]
+[ext_resource type="Texture2D" uid="uid://cyamghvenlfsh" path="res://2D Scene/Player Sprites/CharLD.png" id="7_kwd53"]
+[ext_resource type="Texture2D" uid="uid://cijbp184l7ux" path="res://2D Scene/Player Sprites/CharRD.png" id="8_jq4el"]
+[ext_resource type="Texture2D" uid="uid://x2bwvpxrjbxn" path="res://2D Scene/Player Sprites/CharD.png" id="9_bnpno"]
+[ext_resource type="Texture2D" uid="uid://dpk87ue7dmmtm" path="res://2D Scene/Player Sprites/CharL.png" id="10_ingrd"]
+[ext_resource type="Texture2D" uid="uid://cdlu3ucp0iasi" path="res://2D Scene/Player Sprites/CharR.png" id="11_25d1e"]
+[ext_resource type="Texture2D" uid="uid://dtekox5dbd3ly" path="res://2D Scene/Meat/Meat_Worm.png" id="12_qw8p8"]
+[ext_resource type="Texture2D" uid="uid://bpli0k8ioduxn" path="res://2D Scene/Meat/Meat_Worm_1.png" id="13_5k4x8"]
+[ext_resource type="Texture2D" uid="uid://camfpbtoiq3k6" path="res://2D Scene/Object Sprites/Palm Tree2.png" id="14_p5bk5"]
+[ext_resource type="Texture2D" uid="uid://catyt3dybxnpa" path="res://2D Scene/Object Sprites/Palm Tree.png" id="15_wa2qt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei405"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ahvsh")
+}],
+"loop": true,
+"name": &"back_left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8c7tm")
+}],
+"loop": true,
+"name": &"back_right_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gedy8")
+}],
+"loop": true,
+"name": &"back_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_kwd53")
+}],
+"loop": true,
+"name": &"front_left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jq4el")
+}],
+"loop": true,
+"name": &"front_right_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_bnpno")
+}],
+"loop": true,
+"name": &"front_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ingrd")
+}],
+"loop": true,
+"name": &"side_left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_25d1e")
+}],
+"loop": true,
+"name": &"side_right_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqns4"]
+radius = 4.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2bti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_qw8p8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5k4x8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ta5nu"]
+radius = 7.07107
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flf07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_p5bk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wa2qt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2bti"]
+radius = 6.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="TileMapLayer_Level1" type="TileMapLayer" parent="TileMap"]
+position = Vector2(0, 1)
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD+/wAAAAAAAAAAAAD+////AAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD9////AwAAAAAAAAD9//7/AwAAAAAAAAD+//7/AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AQAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAD8//3/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAwAAAAAAAADx//r/BAAAAAQAAADy//v/BAAAAAUAAADz//z/BAAAAAYAAADy//n/BAABAAQAAADz//r/BAABAAUAAAD0//v/BAABAAYAAADz//j/BAACAAQAAAD0//n/BAACAAUAAAD1//r/BAACAAYAAAD1//j/BAADAAUAAAD2//n/BAADAAYAAAD0//f/BAADAAQAAAD1//b/BAAEAAQAAAD3//j/BAAEAAYAAAD2//f/BAAEAAUAAAD2//X/BAAFAAQAAAD3//b/BAAFAAUAAAD4//f/BAAFAAYAAAD3//T/BAAGAAQAAAD4//X/BAAGAAUAAAD5//b/BAAGAAYAAAD6//f/BAAGAAcAAAD6//X/BAAHAAYAAAD5//T/BAAHAAUAAAD4//P/BAAHAAQAAAD7//T/BAAIAAYAAAD6//P/BAAIAAUAAAD5//L/BAAIAAQAAAD8//P/BAAJAAYAAAD7//L/BAAJAAUAAAD6//H/BAAJAAQAAAD9//L/BAAKAAYAAAD8//H/BAAKAAUAAAD7//D/BAAKAAQAAAD+//H/BAALAAYAAAD9//D/BAALAAUAAAD8/+//BAALAAQAAAD0//X/BAAEAAMAAADz//b/BAADAAMAAADx//j/BAABAAMAAAA=")
+tile_set = ExtResource("1_hlidw")
+
+[node name="EnvironmentalObjects" type="Node2D" parent="TileMap"]
+y_sort_enabled = true
+
+[node name="TileMapLayer_Level2" type="TileMapLayer" parent="TileMap/EnvironmentalObjects"]
+y_sort_enabled = true
+position = Vector2(0, 1)
+scale = Vector2(0.997104, 1)
+tile_map_data = PackedByteArray("AAD6/wIAAgAAAAAAAAD6/wEAAgAAAAAAAAD6/wAAAgAAAAAAAAD6////AgAAAAAAAAD6//7/AgAAAAAAAAD6//3/AgAAAAAAAAD6//z/AgAAAAAAAAD6//v/AgAAAAAAAAD7//v/AgAAAAAAAAD8//v/AgAAAAAAAAD9//v/AgAAAAAAAAD+//v/AgAAAAAAAAD///v/AgAAAAAAAAAAAPv/AgAAAAAAAAABAPv/AgAAAAAAAAACAPv/AgAAAAAAAAD6/wMAAgAAAAAAAAD7/wMAAgAAAAAAAAD8/wMAAgAAAAAAAAD9/wMAAgAAAAAAAAD+/wMAAgAAAAAAAAD//wMAAgAAAAAAAAAAAAMAAgAAAAAAAAABAAMAAgAAAAAAAAACAAMAAgAAAAAAAAACAAIAAgAAAAAAAAACAAEAAgAAAAAAAAACAAAAAgAAAAAAAAACAP//AgAAAAAAAAACAP7/AgAAAAAAAAACAP3/AgAAAAAAAAACAPz/AgAAAAAAAAA=")
+tile_set = ExtResource("1_hlidw")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMap/EnvironmentalObjects"]
+y_sort_enabled = true
+position = Vector2(-48, -7)
+texture = ExtResource("2_w0t24")
+offset = Vector2(0, -8.165)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="TileMap/EnvironmentalObjects/Sprite2D"]
+y_sort_enabled = true
+collision_layer = 256
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMap/EnvironmentalObjects/Sprite2D/AnimatableBody2D"]
+position = Vector2(0, -8)
+polygon = PackedVector2Array(-16, 8, 0, 16, 16, 8, 0, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="TileMap/EnvironmentalObjects"]
+y_sort_enabled = true
+position = Vector2(0, -1.42)
+collision_layer = 2
+collision_mask = 768
+script = ExtResource("3_7arjl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TileMap/EnvironmentalObjects/CharacterBody2D"]
+position = Vector2(1.19209e-07, 1.42)
+scale = Vector2(0.633594, 0.648262)
+sprite_frames = SubResource("SpriteFrames_ei405")
+animation = &"front_walk"
+offset = Vector2(0.9, -8.81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/EnvironmentalObjects/CharacterBody2D"]
+position = Vector2(0, 1.42)
+shape = SubResource("CircleShape2D_hqns4")
+
+[node name="Camera2D" type="Camera2D" parent="TileMap/EnvironmentalObjects/CharacterBody2D"]
+scale = Vector2(0.999461, 1)
+zoom = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TileMap/EnvironmentalObjects"]
+z_index = 1
+position = Vector2(134, -26)
+sprite_frames = SubResource("SpriteFrames_d2bti")
+autoplay = "default"
+frame_progress = 0.29464
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMap/EnvironmentalObjects/AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/EnvironmentalObjects/AnimatedSprite2D/StaticBody2D"]
+position = Vector2(-6, 9)
+shape = SubResource("CircleShape2D_ta5nu")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="TileMap/EnvironmentalObjects"]
+z_index = 1
+position = Vector2(-129, -43)
+sprite_frames = SubResource("SpriteFrames_flf07")
+autoplay = "default"
+frame_progress = 0.238672
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMap/EnvironmentalObjects/AnimatedSprite2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/EnvironmentalObjects/AnimatedSprite2D2/StaticBody2D"]
+position = Vector2(0, 26)
+shape = SubResource("CircleShape2D_d2bti")
