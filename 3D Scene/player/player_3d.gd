@@ -17,7 +17,7 @@ extends CharacterBody3D
 ## animation tree changes between the idle and running states.
 @export var stopping_speed := 1.0
 ## Force in which the character moves other RigidBodies
-@export var push_force := .5
+@export var push_force := 100
 ## The amount of time to stay in the push animation unit we revert to walk or idle
 @export var push_anim_delay := 0.2
 
