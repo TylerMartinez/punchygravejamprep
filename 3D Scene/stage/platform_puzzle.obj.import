@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmfphyg8yef1c"
+path="res://.godot/imported/platform_puzzle.obj-9745722730a9a1ab6613e1adcbf57d20.mesh"
+
+[deps]
+
+files=["res://.godot/imported/platform_puzzle.obj-9745722730a9a1ab6613e1adcbf57d20.mesh"]
+
+source_file="res://3D Scene/stage/platform_puzzle.obj"
+dest_files=["res://.godot/imported/platform_puzzle.obj-9745722730a9a1ab6613e1adcbf57d20.mesh", "res://.godot/imported/platform_puzzle.obj-9745722730a9a1ab6613e1adcbf57d20.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

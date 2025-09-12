@@ -1,0 +1,95 @@
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dws2xxtnabs8c"]
+
+[ext_resource type="Texture2D" uid="uid://m2v8foiud31d" path="res://2D Scene/Ground Sprites/GroundTile_Seamless.png" id="1_2quan"]
+[ext_resource type="Texture2D" uid="uid://pqj1a7blybio" path="res://2D Scene/Ground Sprites/DessertTile_Seamless.png" id="2_y15yj"]
+[ext_resource type="Texture2D" uid="uid://5n1sv81maawk" path="res://2D Scene/Ground Sprites/DessertTile1_Rx_60.png" id="3_lqxst"]
+[ext_resource type="Texture2D" uid="uid://bxooo2cu6d6ya" path="res://2D Scene/Ground Sprites/DessertTile_Rx_60.png" id="4_6kmiv"]
+[ext_resource type="Texture2D" uid="uid://ndxjrgj5xasc" path="res://2D Scene/Object Sprites/2dPlayroom.png" id="5_6kmiv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fs4d3"]
+texture = ExtResource("1_2quan")
+texture_region_size = Vector2i(32, 16)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lqxst"]
+texture = ExtResource("2_y15yj")
+texture_region_size = Vector2i(32, 16)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0vqm4"]
+texture = ExtResource("3_lqxst")
+texture_region_size = Vector2i(32, 16)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/y_sort_origin = 12
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 8, -16, 16, 0, 24, 16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rgqeg"]
+texture = ExtResource("4_6kmiv")
+texture_region_size = Vector2i(32, 16)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nd5g"]
+texture = ExtResource("5_6kmiv")
+texture_region_size = Vector2i(32, 16)
+1:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+6:7/0 = 0
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+physics_layer_0/collision_layer = 512
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_fs4d3")
+sources/1 = SubResource("TileSetAtlasSource_lqxst")
+sources/2 = SubResource("TileSetAtlasSource_0vqm4")
+sources/3 = SubResource("TileSetAtlasSource_rgqeg")
+sources/4 = SubResource("TileSetAtlasSource_4nd5g")
