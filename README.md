@@ -11,8 +11,11 @@ those contain the test enviornment for the 3d and 2d respectively.
 Each can be run by doing the following:
 <br>
 - navigating to the tab
+<br>
 - right clicking the desired tab
+<br>
 - selecting "play this scene"
+<br>
 <br>
 ...you can also just play the main_3d by selecting the play button as normal...
 <br>
