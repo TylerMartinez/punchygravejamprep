@@ -29,6 +29,8 @@ data = PackedVector3Array(28.0547, 3.0629, 32.0626, 28.0547, 3.0629, 28.0547, 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_wi601"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 
 [node name="Node3D" type="Node3D"]

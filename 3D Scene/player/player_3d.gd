@@ -32,13 +32,15 @@ var _camera_input_direction := Vector2.ZERO
 #nonsense about the goddam jump animation
 var has_decended = null
 
+var has_decended =null
+var _is_pushing := false
+var _can_move := true
 
 ## The last movement or aim direction input by the player. We use this to orient
 ## the character model.
 @onready var _last_input_direction := global_basis.z
 # We store the initial position of the player to reset to it when the player falls off the map.
-	#CURRENTLY NOT USING ON READY BUT PROBABLY USEFUL LOL--------------------------------------------------------------------------------------------------------------
-#@onready var _start_position := global_position
+@onready var _start_position := global_position
 @onready var _model: Node3D = %DkSkin
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
@@ -47,14 +49,13 @@ var has_decended = null
 
 
 
-func _input(event: InputEvent) -> void:
+#Make player the last place input can be processed so we can intercept input easily other places
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-
-func _unhandled_input(event: InputEvent) -> void:
+		
 	var player_is_using_mouse := (
 		event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	)
@@ -62,21 +63,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera_input_direction.x = event.relative.x * mouse_sensitivity
 		_camera_input_direction.y = event.relative.y * mouse_sensitivity
 
-
-
-
-##NOTE You can set the physics Layer and Mask to "1" on the player3d and interact with physics blocks... im not sure why it works like this if im honest
-##I think it has to do with one directional physics vs kinicmatic or something idk..
-
-
 func _physics_process(delta: float) -> void:
 # Inverted camera tilt
 	_camera_pivot.rotation.x += _camera_input_direction.y * delta  # inverted Y
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, tilt_lower_limit, tilt_upper_limit)
 	_camera_pivot.rotation.y += -_camera_input_direction.x * delta  # horizontal stays the same
 	_camera_input_direction = Vector2.ZERO
+	
+	move_character(delta)
+	play_animation()
 
-
+func move_character(delta: float):
+	# We handle character movement by polling during the physics frame so we have to explictly
+	# turn input off
+	if !_can_move:
+		return
+	
 	# Movement input
 	var raw_input := Input.get_vector("move_left", "move_right", "move_up", "move_down", 0.4)
 	var forward := _camera.global_basis.z
@@ -115,6 +117,24 @@ func _physics_process(delta: float) -> void:
 	_was_on_floor_last_frame = is_on_floor()
 	move_and_slide()
 	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider() 
+		var layer = collider.get_collision_layer_value(4)
+		if collider is RigidBody3D and layer:
+			var push_direction = -collision.get_normal()
+			collider.apply_force(push_direction * push_force)
+			_is_pushing = true
+			_push_timer.start(push_anim_delay)
+			velocity = collider.linear_velocity
+
+func play_animation():
+	if !_can_move:
+		if _anim_player.current_animation != "idle" and _anim_player.has_animation("idle"):
+				_anim_player.play("idle", 0.1)
+		
+		return
+	
 	# Animation control
 	var ground_speed = Vector2(velocity.x, velocity.z).length()
 	var input_magnitude = Input.get_vector("move_left", "move_right", "move_up", "move_down", 0.4).length()
@@ -142,3 +162,12 @@ func _physics_process(delta: float) -> void:
 			# Idle animation
 			if _anim_player.current_animation != "idle" and _anim_player.has_animation("idle"):
 				_anim_player.play("idle", 0.1)
+
+func _on_push_timer_timeout():
+	_is_pushing = false
+
+func _stop_moving():
+	_can_move = false
+	
+func _allow_moving():
+	_can_move = true

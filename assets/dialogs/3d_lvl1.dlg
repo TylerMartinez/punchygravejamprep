@@ -1,0 +1,11 @@
+{
+    "scene": "3d_scene_1",
+    "author": "Grave",
+    "dialogs": {
+      "q_block_1": [
+        "Hello Binty it seems you are monke. That's kinda crazy not gonna lie.",
+        "Anyways I need you to put that green box in the hole. Maybe try pushing it.",
+        "Thanks man."
+      ]
+    }
+}
