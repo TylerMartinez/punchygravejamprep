@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export_group("Movement")
 ## Character maximum run speed on the ground in meters per second.
 @export var move_speed := 30.0
+## Character maximum push speed on the ground in meters per second.
+@export var push_speed := 5.0
 ## Ground movement acceleration in meters per second squared.
 @export var acceleration := 30.0
 ## When the player is on the ground and presses the jump button, the vertical
@@ -14,6 +16,10 @@ extends CharacterBody3D
 ## Minimum horizontal speed on the ground. This controls when the character skin's
 ## animation tree changes between the idle and running states.
 @export var stopping_speed := 1.0
+## Force in which the character moves other RigidBodies
+@export var push_force := 100
+## The amount of time to stay in the push animation unit we revert to walk or idle
+@export var push_anim_delay := 0.2
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.20
@@ -31,6 +37,7 @@ var _camera_input_direction := Vector2.ZERO
 
 #nonsense about the goddam jump animation
 var has_decended = null
+var _is_pushing = false
 
 var has_decended =null
 var _is_pushing := false
@@ -46,8 +53,14 @@ var _can_move := true
 @onready var _camera: Camera3D = %Camera3D
 # _model points to your instanced DkSkin.tscn
 @onready var _anim_player: AnimationPlayer = $DkSkin/AnimationPlayer
+@onready var _push_timer: Timer = $PushTimer
 
 
+func _ready() -> void:
+	_push_timer.wait_time = push_anim_delay # Set the duration
+	_push_timer.one_shot = false # Set to true for a single timeout
+	_push_timer.autostart = false # Control starting manually
+	_push_timer.connect("timeout", Callable(self, "_on_push_timer_timeout"))
 
 #Make player the last place input can be processed so we can intercept input easily other places
 func _unhandled_input(event: InputEvent) -> void:
@@ -105,7 +118,12 @@ func move_character(delta: float):
 	# Velocity & gravity
 	var y_velocity := velocity.y
 	velocity.y = 0.0
-	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
+	
+	var current_speed = move_speed
+	if _is_pushing:
+		current_speed = push_speed
+	
+	velocity = velocity.move_toward(move_direction * current_speed, acceleration * delta)
 	if is_equal_approx(move_direction.length_squared(), 0.0) and velocity.length_squared() < stopping_speed:
 		velocity = Vector3.ZERO
 	velocity.y = y_velocity + _gravity * delta
@@ -144,13 +162,14 @@ func play_animation():
 		has_decended = null
 
 	if _anim_player != null:
-		if not is_on_floor():
+		if not is_on_floor() and !_is_pushing:
 			# Play jump once on takeoff
+
 			if _anim_player.current_animation != "jump" and _anim_player.has_animation("jump"):
 				if has_decended == null:
 					_anim_player.play("jump", 0.1)
 					has_decended = 1
-		elif input_magnitude > 0.1 and ground_speed < 0.1:
+		elif _is_pushing or (input_magnitude > 0.1 and ground_speed < 0.1):
 			# Player is trying to move but is blocked -> push animation
 			if _anim_player.current_animation != "push" and _anim_player.has_animation("push"):
 				_anim_player.play("push", 0.1)

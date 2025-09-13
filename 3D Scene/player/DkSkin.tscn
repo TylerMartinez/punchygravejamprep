@@ -3,3 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://bqjw6q8e0048h" path="res://3D Scene/player/DkSkin.glb" id="1_8uws5"]
 
 [node name="DkSkin" instance=ExtResource("1_8uws5")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(0.105546, 0, 0, 0.994414)
+bones/2/rotation = Quaternion(0.670123, 0.244918, 0.225687, 0.663337)
+bones/3/rotation = Quaternion(0.205008, -0.0107965, -0.195548, 0.958966)
+bones/4/rotation = Quaternion(0.432954, 2.14914e-07, 1.03224e-07, 0.901416)
+bones/6/rotation = Quaternion(0.610388, -0.105224, -0.356968, 0.699234)
+bones/7/rotation = Quaternion(0.223096, 0.0119207, 0.218537, 0.949909)
+bones/9/rotation = Quaternion(-0.268386, 0.129865, 0.464359, 0.833952)
+bones/10/rotation = Quaternion(-0.708525, -0.0421165, -0.231671, 0.665243)
+bones/11/rotation = Quaternion(0.679705, 0.0384419, 0.289421, 0.672873)
+bones/13/rotation = Quaternion(-0.125299, -0.361592, -0.521498, 0.762622)
+bones/14/rotation = Quaternion(-0.708525, 0.0421165, 0.231671, 0.665243)
+bones/15/rotation = Quaternion(0.679705, -0.0384418, -0.289421, 0.672873)
