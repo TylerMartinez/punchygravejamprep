@@ -38,9 +38,6 @@ var _camera_input_direction := Vector2.ZERO
 #nonsense about the goddam jump animation
 var has_decended = null
 var _is_pushing = false
-
-var has_decended =null
-var _is_pushing := false
 var _can_move := true
 
 ## The last movement or aim direction input by the player. We use this to orient

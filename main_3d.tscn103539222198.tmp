@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bwhjdwjslexdu"]
+[gd_scene load_steps=17 format=3 uid="uid://bwhjdwjslexdu"]
 
 [ext_resource type="PackedScene" uid="uid://dxipdybrt3k8t" path="res://3D Scene/player/player_3d.tscn" id="1_nrwyk"]
 [ext_resource type="PackedScene" uid="uid://def5o8mf7kynw" path="res://3D Scene/objects/GreenBox/blockg.glb" id="2_2wc1w"]
@@ -6,9 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bsse83wx1sdnk" path="res://3D Scene/objects/YellowBox/blocky.glb" id="4_xofcu"]
 [ext_resource type="FontFile" uid="uid://bmhcchy4wwt61" path="res://assets/fonts/Mario64.ttf" id="5_2wc1w"]
 [ext_resource type="Script" uid="uid://drj61j7fjl1bx" path="res://3D Scene/triggers/puzzle_win_trigger.gd" id="5_8jj3j"]
-[ext_resource type="Texture2D" uid="uid://cmsbrvjfr20a4" path="res://assets/sprites/speech_bubble.png" id="5_vipva"]
-[ext_resource type="Script" uid="uid://dlji6xf3fyprc" path="res://speech_trigger.gd" id="6_et6uk"]
-[ext_resource type="Texture2D" uid="uid://bc63om45pk5us" path="res://assets/sprites/speech_notification.png" id="7_wi601"]
 [ext_resource type="PackedScene" uid="uid://uotyx1dpynrl" path="res://3D Scene/menus/CharacterDialog.tscn" id="9_et6uk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bvp3"]
@@ -36,8 +33,6 @@ data = PackedVector3Array(28.0547, 3.0629, 32.0626, 28.0547, 3.0629, 28.0547, 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(0.992065, 1, 1)
-
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_xofcu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 
@@ -90,32 +85,6 @@ mass = 0.115
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.00793457, 0, 0)
 shape = SubResource("BoxShape3D_lquwl")
 
-[node name="SpeechTrigger" type="Area3D" parent="QuestionBlock" node_paths=PackedStringArray("speech_indicator", "speech_available_indicator", "dialog")]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("6_et6uk")
-speech_indicator = NodePath("../SpeechBubble")
-speech_available_indicator = NodePath("../SpeechNotification")
-dialog_id = "q_block_1"
-dialog = NodePath("../../CanvasLayer/CharacterDialog")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="QuestionBlock/SpeechTrigger"]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.420936, 0)
-shape = SubResource("HeightMapShape3D_xofcu")
-
-[node name="SpeechBubble" type="Sprite3D" parent="QuestionBlock"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.96831, 0)
-visible = false
-billboard = 1
-texture_filter = 0
-texture = ExtResource("5_vipva")
-
-[node name="SpeechNotification" type="Sprite3D" parent="QuestionBlock"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.96831, 0)
-billboard = 1
-texture_filter = 0
-texture = ExtResource("7_wi601")
-
 [node name="CSGBlock" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91228, -7.07121)
 collision_layer = 4
@@ -153,11 +122,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CharacterDialog" parent="CanvasLayer" instance=ExtResource("9_et6uk")]
-visible = false
 file = "res://assets/dialogs/3d_lvl1.dlg"
 
-[connection signal="body_entered" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_entered"]
-[connection signal="body_exited" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_exited"]
 [connection signal="body_entered" from="PuzzleWinTrigger" to="PuzzleWinTrigger" method="_on_body_entered"]
-[connection signal="dialog_closed" from="CanvasLayer/CharacterDialog" to="Player3D" method="_allow_moving"]
-[connection signal="dialog_opened" from="CanvasLayer/CharacterDialog" to="Player3D" method="_allow_moving"]
