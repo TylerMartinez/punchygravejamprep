@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 @export_group("Movement")
@@ -63,7 +64,6 @@ var _can_move := true
 @onready var _push_timer: Timer = $PushTimer
 
 @onready var _debug_text: Label3D = %DebugText
-
 
 func _ready() -> void:
 	_push_timer.wait_time = push_anim_delay # Set the duration
@@ -208,3 +208,7 @@ func _stop_moving():
 	
 func _allow_moving():
 	_can_move = true
+
+func respawn():
+	velocity = Vector3.ZERO
+	position = _start_position

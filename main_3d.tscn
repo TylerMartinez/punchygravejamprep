@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bwhjdwjslexdu"]
+[gd_scene load_steps=24 format=3 uid="uid://bwhjdwjslexdu"]
 
 [ext_resource type="PackedScene" uid="uid://dxipdybrt3k8t" path="res://3D Scene/player/player_3d.tscn" id="1_nrwyk"]
+[ext_resource type="Texture2D" uid="uid://c4orcfcpaf3mo" path="res://assets/Panorama_Sky_02-512x512.png" id="1_xjxh8"]
 [ext_resource type="PackedScene" uid="uid://def5o8mf7kynw" path="res://3D Scene/objects/GreenBox/blockg.glb" id="2_2wc1w"]
 [ext_resource type="PackedScene" uid="uid://bkpi56mbmeqnu" path="res://3D Scene/stage/platform_puzzle.glb" id="3_8jj3j"]
 [ext_resource type="PackedScene" uid="uid://bsse83wx1sdnk" path="res://3D Scene/objects/YellowBox/blocky.glb" id="4_xofcu"]
@@ -10,15 +11,13 @@
 [ext_resource type="Script" uid="uid://dlji6xf3fyprc" path="res://speech_trigger.gd" id="6_et6uk"]
 [ext_resource type="Texture2D" uid="uid://bc63om45pk5us" path="res://assets/sprites/speech_notification.png" id="7_wi601"]
 [ext_resource type="PackedScene" uid="uid://uotyx1dpynrl" path="res://3D Scene/menus/CharacterDialog.tscn" id="9_et6uk"]
+[ext_resource type="Script" uid="uid://dagpayyruouhu" path="res://kill_plane.gd" id="12_238tj"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bvp3"]
-sky_top_color = Color(0.717112, 0.952634, 0.900038, 1)
-sky_horizon_color = Color(0.575052, 0.689833, 0.640882, 1)
-ground_bottom_color = Color(0.576471, 0.690196, 0.639216, 1)
-ground_horizon_color = Color(0.576471, 0.690196, 0.639216, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_238tj"]
+panorama = ExtResource("1_xjxh8")
 
 [sub_resource type="Sky" id="Sky_lquwl"]
-sky_material = SubResource("ProceduralSkyMaterial_1bvp3")
+sky_material = SubResource("PanoramaSkyMaterial_238tj")
 
 [sub_resource type="Environment" id="Environment_7mycd"]
 background_mode = 2
@@ -42,6 +41,8 @@ size = Vector3(0.992065, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xofcu"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h6orv"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -133,7 +134,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4647, -1.4073, -4.865)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_8jj3j")
-control_to_display = NodePath("../CanvasLayer/VBoxContainer/Winner")
+control_to_display = NodePath("../CanvasLayer/Winner")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PuzzleWinTrigger"]
 shape = SubResource("BoxShape3D_xofcu")
@@ -145,28 +146,44 @@ follow_viewport_enabled = true
 visible = false
 file = "res://assets/dialogs/3d_lvl1.dlg"
 
-[node name="VBoxContainer" type="CenterContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Winner" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(1000, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -201.5
+offset_right = 500.0
+offset_bottom = 201.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Winner" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(1000, 0)
-layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("5_2wc1w")
 theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
-text = "[wave amp=50.0 freq=5.0 connected=1][rainbow freq=.5 sat=1 val=01 speed=1.0] YOUR   WINNER!!!!!! [/rainbow]"
+text = "[wave amp=50.0 freq=5.0 connected=1][rainbow freq=.5 sat=1 val=01 speed=1.0] YOUR WINNER!!!!!! [/rainbow]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="KillPlane" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_238tj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillPlane"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -22.369064, 0)
+shape = SubResource("WorldBoundaryShape3D_h6orv")
 
 [connection signal="body_entered" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_exited"]
 [connection signal="body_entered" from="PuzzleWinTrigger" to="PuzzleWinTrigger" method="_on_body_entered"]
 [connection signal="dialog_closed" from="CanvasLayer/CharacterDialog" to="Player3D" method="_allow_moving"]
 [connection signal="dialog_opened" from="CanvasLayer/CharacterDialog" to="Player3D" method="_allow_moving"]
+[connection signal="body_entered" from="KillPlane" to="KillPlane" method="_on_body_entered"]
