@@ -7,6 +7,16 @@ extends CharacterBody3D
 @export var push_speed := 5.0
 ## Ground movement acceleration in meters per second squared.
 @export var acceleration := 30.0
+
+## Ground movement decelleration in when turning
+@export var turn_decelleration := 100.0
+
+## Ground movement decelleration in meters per second squared.
+@export var decelleration := 150.0
+
+## The threshold for the dot product of the turn vector to apply decelleration
+@export_range(0.0, 1.0) var turn_decelleration_threshold := 0.50
+
 ## When the player is on the ground and presses the jump button, the vertical
 ## velocity is set to this value.
 @export var jump_impulse := 20.0
@@ -31,7 +41,7 @@ extends CharacterBody3D
 ## The camera uses this to keep a fixed height while the player jumps, for example.
 var ground_height := 0.0
 
-var _gravity := -30.0
+var _gravity := -30
 var _was_on_floor_last_frame := true
 var _camera_input_direction := Vector2.ZERO
 
@@ -51,6 +61,8 @@ var _can_move := true
 # _model points to your instanced DkSkin.tscn
 @onready var _anim_player: AnimationPlayer = $DkSkin/AnimationPlayer
 @onready var _push_timer: Timer = $PushTimer
+
+@onready var _debug_text: Label3D = %DebugText
 
 
 func _ready() -> void:
@@ -120,9 +132,17 @@ func move_character(delta: float):
 	if _is_pushing:
 		current_speed = push_speed
 	
-	velocity = velocity.move_toward(move_direction * current_speed, acceleration * delta)
-	if is_equal_approx(move_direction.length_squared(), 0.0) and velocity.length_squared() < stopping_speed:
-		velocity = Vector3.ZERO
+	var dot = move_direction.dot(velocity.normalized())
+	
+	_debug_text.text = "v:%s \n dir%s \n dot: %s" % [velocity.normalized(), move_direction, dot ]
+	
+	if move_direction == Vector3.ZERO or dot < 0:
+		velocity = velocity.move_toward(Vector3.ZERO, decelleration * delta)
+	elif abs(dot) < turn_decelleration_threshold:
+		velocity = velocity.move_toward(move_direction, turn_decelleration * delta)
+	else:
+		velocity = velocity.move_toward(move_direction * current_speed, acceleration * delta)
+
 	velocity.y = y_velocity + _gravity * delta
 
 	# Jumping
@@ -130,6 +150,7 @@ func move_character(delta: float):
 		velocity.y += jump_impulse
 
 	_was_on_floor_last_frame = is_on_floor()
+	
 	move_and_slide()
 	
 	for i in get_slide_collision_count():

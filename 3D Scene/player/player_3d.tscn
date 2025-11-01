@@ -29,3 +29,11 @@ transform = Transform3D(-1, 3.61926e-15, -8.74228e-08, 4.13762e-08, 0.880907, -0
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
+
+[node name="DebugText" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.739015, 0)
+visible = false
+billboard = 1
+text = "DEBUG TEXT"
+font_size = 240
