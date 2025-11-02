@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://drj61j7fjl1bx" path="res://3D Scene/triggers/puzzle_win_trigger.gd" id="5_8jj3j"]
 [ext_resource type="Texture2D" uid="uid://cmsbrvjfr20a4" path="res://assets/sprites/speech_bubble.png" id="5_vipva"]
 [ext_resource type="Script" uid="uid://dlji6xf3fyprc" path="res://speech_trigger.gd" id="6_et6uk"]
-[ext_resource type="Texture2D" uid="uid://bc63om45pk5us" path="res://assets/sprites/speech_notification.png" id="7_wi601"]
+[ext_resource type="Texture2D" uid="uid://bc63om45pk5us" path="res://assets/speech_notification.png" id="7_wi601"]
 [ext_resource type="PackedScene" uid="uid://uotyx1dpynrl" path="res://3D Scene/menus/CharacterDialog.tscn" id="9_et6uk"]
 [ext_resource type="Script" uid="uid://dagpayyruouhu" path="res://kill_plane.gd" id="12_238tj"]
 
