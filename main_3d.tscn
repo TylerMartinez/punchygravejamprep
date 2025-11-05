@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwhjdwjslexdu"]
+[gd_scene load_steps=25 format=3 uid="uid://bwhjdwjslexdu"]
 
 [ext_resource type="PackedScene" uid="uid://dxipdybrt3k8t" path="res://3D Scene/player/player_3d.tscn" id="1_nrwyk"]
 [ext_resource type="Texture2D" uid="uid://c4orcfcpaf3mo" path="res://assets/Panorama_Sky_02-512x512.png" id="1_xjxh8"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bc63om45pk5us" path="res://assets/speech_notification.png" id="7_wi601"]
 [ext_resource type="PackedScene" uid="uid://uotyx1dpynrl" path="res://3D Scene/menus/CharacterDialog.tscn" id="9_et6uk"]
 [ext_resource type="Script" uid="uid://dagpayyruouhu" path="res://kill_plane.gd" id="12_238tj"]
+[ext_resource type="PackedScene" uid="uid://cogr7wgv4shox" path="res://3D Scene/objects/banana/banana.tscn" id="13_h6orv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_238tj"]
 panorama = ExtResource("1_xjxh8")
@@ -180,6 +181,9 @@ script = ExtResource("12_238tj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillPlane"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -22.369064, 0)
 shape = SubResource("WorldBoundaryShape3D_h6orv")
+
+[node name="Banana" parent="." instance=ExtResource("13_h6orv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.443462, 3.0537372, 8.702498)
 
 [connection signal="body_entered" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="QuestionBlock/SpeechTrigger" to="QuestionBlock/SpeechTrigger" method="_on_body_exited"]

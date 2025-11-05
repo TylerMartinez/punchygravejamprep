@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cogr7wgv4shox"]
+
+[ext_resource type="Script" uid="uid://ciohj7vhhsjlq" path="res://3D Scene/objects/banana/banana.gd" id="1_86jy5"]
+[ext_resource type="PackedScene" uid="uid://c10x6ol0gypi1" path="res://3D Scene/objects/banana/banana.blend" id="2_86jy5"]
+
+[node name="Banana" type="Node3D" node_paths=PackedStringArray("model")]
+script = ExtResource("1_86jy5")
+model = NodePath("banana")
+
+[node name="banana" parent="." instance=ExtResource("2_86jy5")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
