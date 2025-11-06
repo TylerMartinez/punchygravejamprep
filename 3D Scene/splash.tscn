@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://y1wtycu2b0ys"]
+
+[ext_resource type="Texture2D" uid="uid://bwcteyeghyujf" path="res://3D Scene/player/DkSkin_0c30c432.png" id="1_frw8m"]
+[ext_resource type="Script" uid="uid://bctnhygflnjqv" path="res://3D Scene/splash.gd" id="1_h82kh"]
+[ext_resource type="PackedScene" uid="uid://clcid8iwf22j" path="res://3D Scene/bananasplash.tscn" id="3_h82kh"]
+[ext_resource type="FontFile" uid="uid://bmhcchy4wwt61" path="res://assets/fonts/Mario64.ttf" id="4_5v3rv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h82kh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h82kh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_frw8m")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_3d = 1
+
+[node name="bananasplash" parent="SubViewport" instance=ExtResource("3_h82kh")]
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 304.0
+offset_top = -281.0
+offset_right = 816.00006
+offset_bottom = 231.0
+scale = Vector2(2, 2)
+texture = SubResource("ViewportTexture_h82kh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = -23.0
+offset_right = 679.0
+offset_bottom = 327.0
+theme_override_fonts/normal_font = ExtResource("4_5v3rv")
+theme_override_font_sizes/normal_font_size = 128
+text = "MONKE's DAY OUT"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 365.0
+offset_right = 621.0
+offset_bottom = 715.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_5v3rv")
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]@GraveFellow
+@Punchy_Nom
+@astronaut_17
+[/b]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 737.0
+offset_top = 560.0
+offset_right = 1361.0
+offset_bottom = 910.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_5v3rv")
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "Press Z to start
+"
