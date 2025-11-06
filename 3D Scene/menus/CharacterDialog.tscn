@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://uotyx1dpynrl"]
+[gd_scene load_steps=4 format=3 uid="uid://uotyx1dpynrl"]
 
 [ext_resource type="FontFile" uid="uid://bmhcchy4wwt61" path="res://assets/fonts/Mario64.ttf" id="1_21gke"]
 [ext_resource type="Script" uid="uid://dv4cbs3re83hq" path="res://3D Scene/menus/character_dialog.gd" id="1_xy50e"]
+[ext_resource type="AudioStream" uid="uid://dntttkya0arr4" path="res://assets/sounds/talk.ogg" id="3_ij3uf"]
 
 [node name="CharacterDialog" type="Control"]
 layout_mode = 3
@@ -74,3 +75,9 @@ theme_override_fonts/normal_font = ExtResource("1_21gke")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]V[/pulse]"
+
+[node name="TalkNoise" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ij3uf")
+volume_db = -15.0
+bus = &"Soundfx"

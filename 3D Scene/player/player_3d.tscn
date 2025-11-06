@@ -1,14 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxipdybrt3k8t"]
+[gd_scene load_steps=9 format=3 uid="uid://dxipdybrt3k8t"]
 
 [ext_resource type="Script" uid="uid://dcg3tuu8f4en6" path="res://3D Scene/player/player_3d.gd" id="1_slp4n"]
 [ext_resource type="PackedScene" uid="uid://610ev0eal8fp" path="res://3D Scene/player/DkSkin.tscn" id="1_vxir6"]
+[ext_resource type="AudioStream" uid="uid://cm5tjjtm355nu" path="res://assets/sounds/walk_grass_0.ogg" id="3_512gj"]
+[ext_resource type="AudioStream" uid="uid://blih4kjbxs7e" path="res://assets/sounds/jump.ogg" id="3_i7hin"]
+[ext_resource type="AudioStream" uid="uid://d10b1j0r1e0cg" path="res://assets/sounds/walk_grass_1.ogg" id="4_wyofv"]
+[ext_resource type="AudioStream" uid="uid://bv0g20l3a4jaq" path="res://assets/sounds/push.ogg" id="6_wyofv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_slp4n"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kk2it"]
+streams_count = 2
+stream_0/stream = ExtResource("3_512gj")
+stream_0/weight = 2.0
+stream_1/stream = ExtResource("4_wyofv")
 
 [node name="Player3D" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_slp4n")
+push_anim_delay = 0.4
 
 [node name="DkSkin" parent="." instance=ExtResource("1_vxir6")]
 unique_name_in_owner = true
@@ -30,6 +41,11 @@ unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
 
+[node name="WalkTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
 [node name="DebugText" type="Label3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.739015, 0)
@@ -37,3 +53,23 @@ visible = false
 billboard = 1
 text = "DEBUG TEXT"
 font_size = 240
+
+[node name="GrassWalk" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.841052, 2.1688442)
+stream = SubResource("AudioStreamRandomizer_kk2it")
+volume_db = -15.0
+
+[node name="JumpGrunt" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.841052, 2.1688442)
+stream = ExtResource("3_i7hin")
+volume_db = -5.0
+bus = &"Soundfx"
+
+[node name="PushScrape" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.841052, 2.1688442)
+stream = ExtResource("6_wyofv")
+volume_db = -5.0
+bus = &"Soundfx"

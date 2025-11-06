@@ -32,6 +32,9 @@ extends CharacterBody3D
 ## The amount of time to stay in the push animation unit we revert to walk or idle
 @export var push_anim_delay := 0.2
 
+@export var walk_sound_delay := .3
+@export var walk_sound_delay_random_offeset := .1
+
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.20
 @export var tilt_upper_limit := PI / 2.0   # look up max 45°
@@ -139,14 +142,17 @@ func move_character(delta: float):
 	if move_direction == Vector3.ZERO or dot < 0:
 		velocity = velocity.move_toward(Vector3.ZERO, decelleration * delta)
 	elif abs(dot) < turn_decelleration_threshold:
+		play_walking_noise()
 		velocity = velocity.move_toward(move_direction, turn_decelleration * delta)
 	else:
+		play_walking_noise()
 		velocity = velocity.move_toward(move_direction * current_speed, acceleration * delta)
 
 	velocity.y = y_velocity + _gravity * delta
 
 	# Jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		%JumpGrunt.play()
 		velocity.y += jump_impulse
 
 	_was_on_floor_last_frame = is_on_floor()
@@ -159,10 +165,18 @@ func move_character(delta: float):
 		var layer = collider.get_collision_layer_value(4)
 		if collider is RigidBody3D and layer:
 			var push_direction = -collision.get_normal()
+			if !%PushScrape.playing:
+				%PushScrape.play()
+				
 			collider.apply_force(push_direction * push_force)
 			_is_pushing = true
 			_push_timer.start(push_anim_delay)
 			velocity = collider.linear_velocity
+
+func play_walking_noise():
+	if %WalkTimer.time_left <= 0 and is_on_floor():
+		%GrassWalk.play()
+		%WalkTimer.start(randf_range(walk_sound_delay- walk_sound_delay_random_offeset, walk_sound_delay + walk_sound_delay_random_offeset))
 
 func play_animation():
 	if !_can_move:
@@ -202,6 +216,7 @@ func play_animation():
 
 func _on_push_timer_timeout():
 	_is_pushing = false
+	%PushScrape.stop()
 
 func _stop_moving():
 	_can_move = false

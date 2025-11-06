@@ -50,6 +50,7 @@ func show_dialog(dialog_id: String):
 
 func _reveal_text():
 	_revealing_text = true
+	%TalkNoise.play()
 	
 	text_label.visible_characters = 0
 	text_label.text = _dialog_entries[_current_entry]
@@ -62,6 +63,7 @@ func _reveal_text():
 	
 	await reveal_tween.finished
 	
+	%TalkNoise.stop()
 	_revealing_text = false
 	
 	if (_current_entry +1) >= _dialog_entries.size():
